@@ -2,6 +2,7 @@ import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import tw from 'tailwind-react-native-classnames'
 import { Icon } from 'react-native-elements'
+import { useNavigation } from '@react-navigation/native'
 const data=[
     {
         id:'123',
@@ -19,13 +20,14 @@ const data=[
 
 
 const NavOptions = () => {
+    const navigation=useNavigation();
   return (
     <FlatList 
         data={data}
         keyExtractor={(item)=>item.id} //extracts only unique items. Here item is id which is unique 
         horizontal//vertical by default
         renderItem={({item})=>(
-           <TouchableOpacity 
+           <TouchableOpacity onPress={()=>{navigation.navigate(item.screen)}}
         style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}
            >
            <View>
