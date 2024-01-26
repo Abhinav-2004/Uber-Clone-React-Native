@@ -4,11 +4,13 @@ import { Provider } from 'react-redux';
 import { store } from './Store';
 import HomeScreen from './screens/HomeScreen';
 //1)setup redux
-
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 export default function App() {
   return (
     <Provider store={store}>
+     <SafeAreaProvider>
       <HomeScreen/>
+     </SafeAreaProvider>
     </Provider>
   );
 }
