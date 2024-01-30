@@ -5,12 +5,14 @@ import Map from '../components/Map'
 import { createStackNavigator } from '@react-navigation/stack'
 import NavigateCard from '../components/NavigateCard'
 import RideOptionCard from '../components/RideOptionCard'
+
 tw
 const MapScreen = () => {
   const Stack=createStackNavigator();
 
   return (
-    <SafeAreaView>
+    <View>
+      
       <View style={tw`h-1/2`}>
         <Map/>
       </View>
@@ -33,7 +35,8 @@ const MapScreen = () => {
             />
           </Stack.Navigator>
       </View>
-    </SafeAreaView>
+      
+    </View>
     
   )
 }

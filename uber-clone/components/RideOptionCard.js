@@ -12,10 +12,13 @@ import tw from "tailwind-react-native-classnames";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
+import { selecttravelTimeInformation } from "../slices/navSlice";
 
 const RideOptionCard = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
+  const travelTimeInformation=useSelector(selecttravelTimeInformation);
   const data = [
     {
       id: "Uber-Go-123",
@@ -48,7 +51,7 @@ const RideOptionCard = () => {
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
         <Text style={tw`text-center font-semibold py-5 text-xl ml-5`}>
-          Select a Ride{" "}
+          Select a Ride - {travelTimeInformation.distance} km
         </Text>
       </View>
       <FlatList
@@ -68,9 +71,9 @@ const RideOptionCard = () => {
             />
             <View style={{ marginLeft: -10 }}>
               <Text style={tw`text-xl font-semibold`}>{title}</Text>
-              <Text>travel time...</Text>
+              <Text>{travelTimeInformation.time}mins</Text>
             </View>
-            <Text style={tw`text-xl font-semibold`}>₹ 600</Text>
+            <Text style={tw`text-xl font-semibold`}>₹ {(travelTimeInformation.distance * multiplier * 30).toFixed(0)}.00</Text>
           </TouchableOpacity>
         )}
       />

@@ -2,37 +2,46 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useRef } from "react";
 import MapView, { Marker } from "react-native-maps";
 import tw from "tailwind-react-native-classnames";
-import { useSelector } from "react-redux";
-import { selectDestination, selectOrigin } from "../slices/navSlice";
-import { FontAwesome5 } from '@expo/vector-icons';
-
+import { useDispatch, useSelector } from "react-redux";
+import { selectDestination, selectOrigin, setTravelTimeInformation } from "../slices/navSlice";
+import { FontAwesome5 } from "@expo/vector-icons";
 import MapViewDirections from "react-native-maps-directions";
-import {API_KEY} from "@env";
+import { API_KEY } from "@env";
+
+
 const Map = () => {
   const origin = useSelector(selectOrigin);
-  const destination=useSelector(selectDestination);
-  console.log(useSelector(selectOrigin));
-  const mapRef=useRef(null);
-useEffect(()=>{
-    if(!origin && !destination) return;
-    
+  const destination = useSelector(selectDestination);
+  //console.log(useSelector(selectOrigin));
+  const mapRef = useRef(null);
+  const dispatch=useDispatch();
+  useEffect(() => {
+    if (!origin && !destination) return;
+
     //Zoom and fit to both markers
-    function mapShift(){
-      mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], 
-      {
-        edgePadding:{top:150, right:150, bottom:150, left:150}
-      })
+    function mapShift() {
+      mapRef.current.fitToSuppliedMarkers(["origin", "destination"], {
+        edgePadding: { top: 150, right: 150, bottom: 150, left: 150 },
+      });
     }
     //mapShift();
     setTimeout(() => {
       mapShift();
     }, 1500);
-},[origin, destination])
+  }, [origin, destination]);
+
+  useEffect(() => {
+    const getTravelTime = async () => {
+      if (!origin || !destination) return;
+      
+    };
+    getTravelTime();
+  }, [origin, destination, API_KEY]);
 
   return (
     <View>
       <MapView
-      ref={mapRef}
+        ref={mapRef}
         mapType="mutedStandard"
         initialRegion={{
           latitude: origin.location.lat,
@@ -41,15 +50,23 @@ useEffect(()=>{
           longitudeDelta: 0.005,
         }}
         style={styles.map}
-      > 
+      >
         {origin && destination && (
-            <MapViewDirections
+          <MapViewDirections
             origin={origin.description}
             destination={destination.description}
             apikey={API_KEY}
             strokeColor="black"
             strokeWidth={3}
-            />
+            onReady={(result)=>{
+              //console.log(result.distance.toFixed(2))
+               //console.log(result.duration.toFixed(2))
+              dispatch(setTravelTimeInformation({
+                distance:result.distance.toFixed(2),
+                time:result.duration.toFixed(2),
+              }))
+            }}//return hell lot of informations
+          />
         )}
         {origin?.location && (
           <Marker
@@ -59,18 +76,17 @@ useEffect(()=>{
             }}
             title="Origin"
             description={origin.description}
-            identifier="origin"// will be used in mapRef
+            identifier="origin" // will be used in mapRef
           >
-              <FontAwesome5 name="house-user" size={24} color="black" />
+            <FontAwesome5 name="house-user" size={24} color="black" />
           </Marker>
         )}
-         {destination?.location && (
-          <Marker 
+        {destination?.location && (
+          <Marker
             coordinate={{
               latitude: destination.location.lat,
               longitude: destination.location.lng,
             }}
-            
             title="Drop"
             description={destination.description}
             identifier="destination" // will be used in mapRef
