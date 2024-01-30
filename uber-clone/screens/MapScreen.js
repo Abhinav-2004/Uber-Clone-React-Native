@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 import tw from 'tailwind-react-native-classnames'
 import Map from '../components/Map'
@@ -10,7 +10,7 @@ const MapScreen = () => {
   const Stack=createStackNavigator();
 
   return (
-    <View>
+    <SafeAreaView>
       <View style={tw`h-1/2`}>
         <Map/>
       </View>
@@ -33,7 +33,7 @@ const MapScreen = () => {
             />
           </Stack.Navigator>
       </View>
-    </View>
+    </SafeAreaView>
     
   )
 }

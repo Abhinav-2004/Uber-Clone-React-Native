@@ -17,10 +17,16 @@ useEffect(()=>{
     if(!origin && !destination) return;
     
     //Zoom and fit to both markers
-    mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], 
-    {
+    function mapShift(){
+      mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], 
+      {
         edgePadding:{top:150, right:150, bottom:150, left:150}
-    })
+      })
+    }
+    //mapShift();
+    setTimeout(() => {
+      mapShift();
+    }, 1500);
 },[origin, destination])
 
   return (
