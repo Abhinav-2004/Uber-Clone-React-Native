@@ -4,10 +4,10 @@
     "slug": "uber-clone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/uber.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/uber.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,18 +19,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/uber.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.abhinav_2004.uberclone"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/uber.png"
     },
     "extra": {
       "eas": {
         "projectId": "399a745f-072a-420a-b56c-8a8c2cef4bd8"
       }
-    }
+    },
+    "plugins": [
+      "./android-manifest.plugin.js"
+    ]
   }
 }

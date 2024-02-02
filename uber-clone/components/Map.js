@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectDestination, selectOrigin, setTravelTimeInformation } from "../slices/navSlice";
 import { FontAwesome5 } from "@expo/vector-icons";
 import MapViewDirections from "react-native-maps-directions";
-import { API_KEY } from "@env";
+
 
 
 const Map = () => {
@@ -20,7 +20,7 @@ const Map = () => {
 
     //Zoom and fit to both markers
     function mapShift() {
-      mapRef.current.fitToSuppliedMarkers(["origin", "destination"], {
+      mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], {
         edgePadding: { top: 150, right: 150, bottom: 150, left: 150 },
       });
     }
@@ -36,7 +36,7 @@ const Map = () => {
       
     };
     getTravelTime();
-  }, [origin, destination, API_KEY]);
+  }, [origin, destination, 'AIzaSyA6gG7wJxAw9oL4sSotlgUOUppuMsmJP4c']);
 
   return (
     <View>
@@ -55,15 +55,16 @@ const Map = () => {
           <MapViewDirections
             origin={origin.description}
             destination={destination.description}
-            apikey={API_KEY}
+            apikey='AIzaSyA6gG7wJxAw9oL4sSotlgUOUppuMsmJP4c'
             strokeColor="black"
             strokeWidth={3}
             onReady={(result)=>{
-              //console.log(result.distance.toFixed(2))
-               //console.log(result.duration.toFixed(2))
-              dispatch(setTravelTimeInformation({
-                distance:result.distance.toFixed(2),
-                time:result.duration.toFixed(2),
+              console.log(result?.distance.toFixed(2))
+               console.log(result?.duration.toFixed(2))
+              result && dispatch(setTravelTimeInformation({
+                distance:result?.distance.toFixed(2),
+                time:result?.duration.toFixed(2),
+              
               }))
             }}//return hell lot of informations
           />
