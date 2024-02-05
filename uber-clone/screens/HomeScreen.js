@@ -3,7 +3,7 @@ import React from "react";
 import tw from "tailwind-react-native-classnames";
 import NavOptions from "../components/NavOptions";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-
+import { API_KEY } from "@env";
 import { useDispatch } from "react-redux";
 import { setDestination, setOrigin } from "../slices/navSlice";
 import NavFavourites from "../components/NavFavourites";
@@ -54,7 +54,7 @@ const HomeScreen = () => {
           enablePoweredByContainer={false}
           minLength={2}
           query={{
-            key: 'AIzaSyA6gG7wJxAw9oL4sSotlgUOUppuMsmJP4c',
+            key: API_KEY,
             language: "en",
           }}
           nearbyPlacesAPI="GooglePlacesSearch"

@@ -3,7 +3,7 @@ import React from "react";
 import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 GooglePlacesAutocomplete;
-
+import { API_KEY } from "@env";
 import { useDispatch } from "react-redux";
 import { setDestination } from "../slices/navSlice";
 import { useNavigation } from "@react-navigation/native";
@@ -22,7 +22,7 @@ const NavigateCard = () => {
         <View>
           <GooglePlacesAutocomplete
             query={{
-                key:'AIzaSyA6gG7wJxAw9oL4sSotlgUOUppuMsmJP4c',
+                key:API_KEY,
                 language:'en',
             }}
             placeholder="Where to?"

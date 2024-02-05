@@ -51,7 +51,7 @@ const RideOptionCard = () => {
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
         <Text style={tw`text-center font-semibold py-5 text-xl ml-5`}>
-          Select a Ride - {travelTimeInformation?.distance} km
+          Select a Ride - {travelTimeInformation.distance} km
         </Text>
       </View>
       <FlatList
@@ -71,9 +71,9 @@ const RideOptionCard = () => {
             />
             <View style={{ marginLeft: -10 }}>
               <Text style={tw`text-xl font-semibold`}>{title}</Text>
-              <Text>{travelTimeInformation?.time}mins</Text>
+              <Text>{travelTimeInformation.time}mins</Text>
             </View>
-            <Text style={tw`text-xl font-semibold`}>₹ {(travelTimeInformation?.distance * multiplier * 30).toFixed(0)}.00</Text>
+            <Text style={tw`text-xl font-semibold`}>₹ {(travelTimeInformation.distance * multiplier * 30).toFixed(0)}.00</Text>
           </TouchableOpacity>
         )}
       />
